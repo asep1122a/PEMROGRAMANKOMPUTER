@@ -4,9 +4,8 @@
  */
 package kasir;
 
-import app.Profiluser;
 import app.koneksi;
-//import app.UserProfile;
+import app.Profiluser;
 import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,26 +14,26 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author LENOVO
  */
-public final class RiwayatTransaksi extends javax.swing.JFrame {
+public final class RiwayatTransaksi2 extends javax.swing.JFrame {
 
 //    String path_gambar;
-    Profiluser p;
+    Profiluser pr;
 
     /**
      * Creates new form RiwayatTransaksi
      */
-    public RiwayatTransaksi() {
+    public RiwayatTransaksi2() {
+        initComponents();
         
     }
 
-    public RiwayatTransaksi(Profiluser Up) {    
+    public RiwayatTransaksi2(Profiluser Up) {
         initComponents();
-        this.p = Up;
+        this.pr = Up;
 //        this.path_gambar = path_gambar;
         Riwayat("transaksi_detail");
     }
@@ -49,6 +48,7 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -59,6 +59,13 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(854, 75));
+
+        jLabel2.setText("kemabali");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -76,10 +83,12 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(63, 63, 63)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -87,9 +96,10 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -124,9 +134,19 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        HalamanKasir k = new HalamanKasir();
+        k.setVisible(true);
+        this.dispose();
+        k.setExtendedState(Frame.MAXIMIZED_BOTH);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        HalamanKasir k = new HalamanKasir();
+        k.setVisible(true);
+        this.dispose();
+        k.setExtendedState(Frame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -146,13 +166,13 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RiwayatTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RiwayatTransaksi2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RiwayatTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RiwayatTransaksi2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RiwayatTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RiwayatTransaksi2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RiwayatTransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RiwayatTransaksi2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -160,7 +180,7 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RiwayatTransaksi().setVisible(true);
+                new RiwayatTransaksi2().setVisible(true);
             }
         });
     }
@@ -168,28 +188,36 @@ public final class RiwayatTransaksi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 public void Riwayat(String where) {
-    try (Connection connection = koneksi.Go(); 
-         Statement statement = connection.createStatement()) {
-        
+    // Pastikan koneksi dengan try-with-resources
+    try (
+        Connection connection = koneksi.Go(); // Membuka koneksi
+        Statement statement = connection.createStatement() // Membuat statement
+    ) {
+        // Mendapatkan model tabel
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-        tableModel.setRowCount(0); // Menghapus semua baris sebelumnya
+        tableModel.setRowCount(0); // Menghapus semua baris sebelumnya dari tabel
 
+        // Query dasar untuk mengambil data dari transaksi_detail
         String query = "SELECT id_transaksi_detail, id_transaksi, id_produk, jumlah_produk, "
-                     + "harga_satuan, total_harga_produk, tanggal_transaksi "
-                     + "FROM transaksi_detail";
+                + "harga_satuan, total_harga_produk, tanggal_transaksi "
+                + "FROM transaksi_detail ";
 
+        // Tambahkan klausa WHERE jika parameter `where` tidak kosong dan valid
         if (where != null && !where.trim().isEmpty()) {
-            query += " WHERE " + where; // Menambahkan klausa WHERE
+            query += where; // Pastikan where sudah aman dari SQL Injection
         }
 
+        // Menjalankan query dan memproses hasilnya
         try (ResultSet resultSet = statement.executeQuery(query)) {
             while (resultSet.next()) {
+                // Mengisi data dari resultSet ke dalam tabel
                 Object[] rowData = {
                     resultSet.getInt("id_transaksi_detail"),
                     resultSet.getInt("id_transaksi"),
@@ -199,20 +227,23 @@ public void Riwayat(String where) {
                     resultSet.getDouble("total_harga_produk"),
                     resultSet.getString("tanggal_transaksi")
                 };
+
+                // Menambahkan baris ke model tabel
                 tableModel.addRow(rowData);
             }
         }
 
-        // Menyembunyikan kolom pertama
+        // Menyesuaikan lebar kolom pertama (id_transaksi_detail) agar tersembunyi
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
 
     } catch (SQLException e) {
+        // Menampilkan pesan error kepada pengguna
         JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage(), 
                                       "Error", JOptionPane.ERROR_MESSAGE);
+
+        // Logging error (opsional, jika ada mekanisme logging)
         e.printStackTrace();
     }
-    
 }
-
 }

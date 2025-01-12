@@ -4,24 +4,25 @@
  */
 package Admin;
 
-import Admin.adminpage;
-import java.io.File;
+//import Admin.adminpage;
+//import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
+//import javax.swing.JComboBox;
+//import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import app.koneksi;
+
 
 /**
  *
  * @author LABKOM
  */
 public class tambahproduk extends javax.swing.JDialog {
-    private String selectedImagePath = null;
+//    private String selectedImagePath = null;
     /**
      * Creates new form TambahProduk
      */
@@ -29,8 +30,8 @@ public class tambahproduk extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        viewCategory("product_category", jComboBox1);
-        viewCategory("supplier", jComboBox2);
+        viewCategory();
+        showSupplier();
     }
 
     /**
@@ -42,12 +43,6 @@ public class tambahproduk extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        code = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        nama = new javax.swing.JTextField();
-        gambar = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -56,51 +51,18 @@ public class tambahproduk extends javax.swing.JDialog {
         beli = new javax.swing.JTextField();
         stok = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        nama = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        code = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("KODE PRODUK");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 21, 129, 33));
-
-        code.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        code.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(code, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 20, 263, 33));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("NAMA PRODUK");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 61, 129, 33));
-
-        nama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 60, 263, 33));
-
-        gambar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        gambar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gambarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(gambar, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 100, 176, 33));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("GAMBAR PRODUK");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 101, 129, 33));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("KATEGORI  PRODUK");
@@ -136,14 +98,6 @@ public class tambahproduk extends javax.swing.JDialog {
         jLabel8.setText("STOK PRODUK");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 299, 129, 33));
 
-        jButton1.setText("Browse...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 100, 81, 34));
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,15 +120,55 @@ public class tambahproduk extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
+        nama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("NAMA PRODUK");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("KODE PRODUK");
+
+        code.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        code.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(code, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(code, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 420));
@@ -186,54 +180,41 @@ public class tambahproduk extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_namaActionPerformed
 
-    private void gambarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gambarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gambarActionPerformed
-
+    
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        JFileChooser jfc = new JFileChooser();
-        jfc.setDialogTitle("Pilih Gambar");
-        int x = jfc.showOpenDialog(this);
-        if (x == JFileChooser.APPROVE_OPTION) {
-            File f = jfc.getSelectedFile();
-            gambar.setText(f.getAbsolutePath());
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
             Connection K = koneksi.Go();
-            String Q = "INSERT INTO products ("
-                    + "product_code,"
-                    + "product_name,"
-                    + "product_image, "
-                    + "product_category, "
-                    + "product_supplier,"
-                    + "product_price_s, "
-                    + "product_price_b, "
-                    + "product_stock) VALUES (?,?,?,?,?,?,?,?)";
+            String Q = "INSERT INTO produk ("
+                    + "kode_produk,"
+                    + "nama_produk,"
+//                    + "deskripsi"
+                    + "kategori, "
+                    + "suplayer,"
+                    + "harga_jual, "
+                    + "harga_beli, "
+                    + "stok) VALUES (?,?,?,?,?,?,?)";
             //System.out.println(Q);
             PreparedStatement ps = K.prepareStatement(Q);
             ps.setString(1, code.getText());
             ps.setString(2, nama.getText());
-            ps.setString(3, gambar.getText());
+//            ps.setString(3, gambar.getText());
             String[] X = jComboBox1.getSelectedItem().toString().split("-");
             String[] Y = jComboBox2.getSelectedItem().toString().split("-");
-            ps.setInt(4, Integer.parseInt(X[0]));
-            ps.setInt(5, Integer.parseInt(Y[0]));
-            ps.setDouble(6, Double.parseDouble(jual.getText()));
-            ps.setDouble(7, Double.parseDouble(beli.getText()));
-            ps.setInt(8, Integer.parseInt(stok.getText()));
+            ps.setInt(3, Integer.parseInt(X[0]));
+            ps.setInt(4, Integer.parseInt(Y[0]));
+            ps.setDouble(5,Integer.parseInt(jual.getText())); 
+            ps.setDouble(6,Integer.parseInt(beli.getText()));
+            ps.setInt(7, Integer.parseInt(stok.getText()));
             ps.executeUpdate();
 
-            ((adminpage)getParent()).viewDataProduct(""); // Refreshing data setelah update
+//            ((adminpage)getParent()).viewDataProduct(""); // Refreshing data setelah update
             JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
 
         } catch (NumberFormatException | SQLException e) {
@@ -296,14 +277,11 @@ public class tambahproduk extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField beli;
     private javax.swing.JTextField code;
-    private javax.swing.JTextField gambar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -316,23 +294,21 @@ public class tambahproduk extends javax.swing.JDialog {
     private javax.swing.JTextField stok;
     // End of variables declaration//GEN-END:variables
 
-private void viewCategory(String tableName, JComboBox cmb){
-    try {
-        cmb.removeAllItems();
-        Connection K = koneksi.Go();
+private void viewCategory(){
+        try {
+            
+            Connection K = koneksi.Go();
             Statement S = K.createStatement();
-            String Q = "SELECT * FROM "+tableName;
+            String Q = "SELECT id_kategori,nama FROM produk_kategori";
             ResultSet R = S.executeQuery(Q);
-//            int n = 1;
+            jComboBox1.removeAllItems();
             while (R.next()) {                 
-                int id = R.getInt("id");                 	 	 	 	 	 	 	 	
-                String name = R.getString("name");
-//                String desc = R.getString("description");
-                cmb.addItem(id+"-"+name);                 
-            }
-    } catch (SQLException e) {
-        System.err.println("ErrorCode: 1123"+e.getMessage());
-    }
+                int id = R.getInt("id_kategori");
+                String name = R.getString("nama");
+                jComboBox1.addItem(id+"-"+name);
+            } 
+        } catch (Exception e) {
+        }
 }
 
 //private void saveProduct() {
@@ -372,4 +348,20 @@ private void viewCategory(String tableName, JComboBox cmb){
 //        JOptionPane.showMessageDialog(this, "Error saving product: " + e.getMessage());
 //    }
 //}
+
+    private void showSupplier() {
+        try {
+            Connection K = koneksi.Go();
+            Statement S = K.createStatement();
+            String Q = "SELECT id_suplayer,nama FROM suplayer_produk";
+            ResultSet R = S.executeQuery(Q);
+            jComboBox2.removeAllItems();
+            while (R.next()) {                 
+                int id = R.getInt("id_suplayer");
+                String name = R.getString("nama");
+                jComboBox2.addItem(id+"-"+name);
+            } 
+        } catch (Exception e) {
+        }
+    }
 }

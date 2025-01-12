@@ -224,9 +224,9 @@ public class ubahproduk extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             Connection l = koneksi.Go();
-            String Q = "UPDATE products "
-                    + "SET product_name = ?, product_image = ?, product_category = ?, product_supplier = ?, "
-                    + "product_price_s = ?, product_price_b = ?, product_stock = ? WHERE product_code = ?";
+            String Q = "UPDATE produk "
+                    + "SET nama_produk = ?, deskripsi = ?, kategori = ?, suplayer = ?, "
+                    + "harga_jual = ?, harga_beli = ?, stok = ? WHERE kode_produk = ?";
 
             PreparedStatement ps = l.prepareStatement(Q);
             ps.setString(1, nama.getText());
@@ -267,20 +267,20 @@ public class ubahproduk extends javax.swing.JDialog {
     gambar.setText(getGP());
 
     // Set kategori
-    for (int i = 0; i < categorip.getItemCount(); i++) {
-        if (categorip.getItemAt(i).contains(getK())) {
-            categorip.setSelectedIndex(i);
-            break;
-        }
-    }
-
-    // Set supplier
-    for (int i = 0; i < suplier.getItemCount(); i++) {
-        if (suplier.getItemAt(i).contains(getS())) {
-            suplier.setSelectedIndex(i);
-            break;
-        }
-    }
+//    for (int i = 0; i < categorip.getItemCount(); i++) {
+//        if (categorip.getItemAt(i).contains(getK())) {
+//            categorip.setSelectedIndex(i);
+//            break;
+//        }
+//    }
+//
+//    // Set supplier
+//    for (int i = 0; i < suplier.getItemCount(); i++) {
+//        if (suplier.getItemAt(i).contains(getS())) {
+//            suplier.setSelectedIndex(i);
+//            break;
+//        }
+//    }
 }
     /**
      * @param args the command line arguments
@@ -424,32 +424,33 @@ public int getId() {
 
     private void viewCategory() {
         try {
-            Connection C = koneksi.Go();
-            Statement ST = C.createStatement();
-            String Q = "SELECT id,name FROM product_category";
-            ResultSet R = ST.executeQuery(Q);
+            
+            Connection K = koneksi.Go();
+            Statement S = K.createStatement();
+            String Q = "SELECT id_kategori,nama FROM produk_kategori";
+            ResultSet R = S.executeQuery(Q);
             categorip.removeAllItems();
-            while (R.next()) {
-                int id = R.getInt("id");
-                String name = R.getString("name");
-                categorip.addItem(id + "-" + name);
-            }
+            while (R.next()) {                 
+                int id = R.getInt("id_kategori");
+                String name = R.getString("nama");
+                 categorip.addItem(id+"-"+name);
+            } 
         } catch (Exception e) {
         }
-    }
+}
 
     private void viewSupplier() {
         try {
-            Connection C = koneksi.Go();
-            Statement ST = C.createStatement();
-            String Q = "SELECT id,name FROM supplier";
-            ResultSet R = ST.executeQuery(Q);
+            Connection K = koneksi.Go();
+            Statement S = K.createStatement();
+            String Q = "SELECT id_suplayer,nama FROM suplayer_produk";
+            ResultSet R = S.executeQuery(Q);
             suplier.removeAllItems();
-            while (R.next()) {
-                int id = R.getInt("id");
-                String name = R.getString("name");
-                suplier.addItem(id + "-" + name);
-            }
+            while (R.next()) {                 
+                int id = R.getInt("id_suplayer");
+                String name = R.getString("nama");
+                suplier.addItem(id+"-"+name);
+            } 
         } catch (Exception e) {
         }
     }

@@ -31,27 +31,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HalamanKasir extends javax.swing.JFrame {
 
-    private Profiluser pr; // Pastikan ini dideklarasikan
-    private int idKasir;
+    Profiluser pr;
 
-    public HalamanKasir(Profiluser profilUser) {
-        this.pr = profilUser; // Inisialisasi objek pr
+    /**
+     * Creates new form HalamanKasir
+     */
+    public HalamanKasir() {
         initComponents();
+    }
 
-        name_login.setText(pr.getNama());
-        role_login.setText(pr.getRole());
+    public HalamanKasir(Profiluser Up) {
+        initComponents();
+        this.pr = Up;
+                role_login.setText(pr.getNama()+"("+pr.getRole()+")"); 
+//        name_login.setText(pr.getNama());
+//        role_login.setText(pr.getRole());
         tabelset();
 
     }
-
-    private HalamanKasir() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     private void tabelset() {
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -499,10 +501,10 @@ public class HalamanKasir extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-//        this.setVisible(false);
-        RiwayatTransaksi1 rt = new RiwayatTransaksi1();
+        this.setVisible(false);
+        RiwayatTransaksi2 rt = new RiwayatTransaksi2(pr);
         rt.setVisible(true);
-
+        rt.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased

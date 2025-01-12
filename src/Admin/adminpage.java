@@ -4,7 +4,7 @@
  */
 package Admin;
 
-import java.awt.Frame;
+//import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -49,7 +49,7 @@ public class adminpage extends javax.swing.JFrame {
         
     }
 //    private void showProfile() {
-//        profil profilFrame = new profil(nama);
+//        profil1 profilFrame = new profil1(nama);
 //        profilFrame.setName(p.getNama());
 //        profilFrame.setAlama(p.getAlamat()); // Pastikan Profiluser memiliki metode getAlamat()
 //        profilFrame.setTelepon(p.getTelepon()); // Pastikan Profiluser memiliki metode getTelepon()
@@ -344,13 +344,13 @@ public class adminpage extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "NO", "ID", "KODE PROMO", "NAMA PROMO", "GAMBAR", "KATEGORI", "SUPPLIER", "HARGA JUAL", "HARGA BELI", "STOK"
+                "NO", "ID", "KODE ", "NAMA ", "KATEGORI", "SUPPLIER", "HARGA JUAL", "HARGA BELI", "STOK"
             }
         ));
         jTabel2.setViewportView(jTable2);
@@ -394,9 +394,12 @@ public class adminpage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileActionPerformed
-        profil profil = new profil(p.getNama(), "dmin");
-        profil.setVisible(true);
-        this.dispose();
+        
+        // TODO add your handling code here:
+        // Membuka halaman profil dengan mengirimkan objek userprofile
+        profil hp = new profil(this.p); // Kirim objek userprofile
+        hp.setVisible(true); // Tampilkan halaman profil
+        this.dispose(); // Tutup halaman admin jika perlu
      
     }//GEN-LAST:event_ProfileActionPerformed
 
@@ -500,10 +503,10 @@ public class adminpage extends javax.swing.JFrame {
         // TODO add your handling code here:
         String key = SearchP.getText();
         String w = "WHERE "
-                + "product_name LIKE '%"+key+"%' "
-                + "OR product_category LIKE '%"+key+"%' "
-                + "OR product_supplier LIKE '%"+key+"%' "
-                + "OR product_price_s LIKE '%"+key+"%'";
+                + "nama_produk LIKE '%"+key+"%' "
+                + "OR kategori LIKE '%"+key+"%' "
+                + "OR suplayer LIKE '%"+key+"%' "
+                + "OR harga_jual LIKE '%"+key+"%'";
         
         viewDataProduct(w); 
     }//GEN-LAST:event_SearchPKeyReleased
@@ -551,7 +554,7 @@ public class adminpage extends javax.swing.JFrame {
                             "Hapus Produk",
                             JOptionPane.YES_NO_OPTION);
                     if (opsi == JOptionPane.YES_OPTION) {
-                        String Q = "DELETE FROM products WHERE id=" + id;
+                        String Q = "DELETE FROM produk WHERE id_produk=" + id;
 
                         try {
                             Connection K = koneksi.Go();
@@ -709,23 +712,23 @@ public class adminpage extends javax.swing.JFrame {
 
         conn = koneksi.Go();
         stmt = conn.createStatement();
-        String sql = "SELECT * FROM products " + where;
+        String sql = "SELECT * FROM produk " + where;
         rs = stmt.executeQuery(sql);
 
         int n = 1;
         while (rs.next()) {
-            int id = rs.getInt("id");
-            String productCode = rs.getString("product_code");
-            String productName = rs.getString("product_name");
-            String productImage = rs.getString("product_image");
-            int productCategory = rs.getInt("product_category");
-            int productSupplier = rs.getInt("product_supplier");
-            double productPriceS = rs.getDouble("product_price_s");
-            double productPriceB = rs.getDouble("product_price_b");
-            int productStock = rs.getInt("product_stock");
+            int id = rs.getInt("id_produk");
+            String productCode = rs.getString("kode_produk");
+            String productName = rs.getString("nama_produk");
+//            String productImage = rs.getString("product_image");
+            int productCategory = rs.getInt("kategori");
+            int productSupplier = rs.getInt("suplayer");
+            double productPriceS = rs.getDouble("harga_jual");
+            double productPriceB = rs.getDouble("harga_beli");
+            int productStock = rs.getInt("stok");
 
             Object[] data = {
-                n, id, productCode, productName, productImage,
+                n, id, productCode, productName,
                 productCategory, productSupplier, productPriceS, productPriceB, productStock
             };
             model.addRow(data);

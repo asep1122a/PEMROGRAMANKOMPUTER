@@ -94,5 +94,5 @@ public class Profiluser {
     private String telepon;
     private String tanggal_lahir;
     
-
+    
 }

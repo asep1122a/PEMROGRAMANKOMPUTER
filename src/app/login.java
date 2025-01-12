@@ -5,6 +5,7 @@
 package app;
 
 import Admin.adminpage;
+import Owner.halamanowner;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 
@@ -69,7 +70,7 @@ public class login extends javax.swing.JFrame {
                     this.setVisible(false);
                     O.setVisible(true);
                 } else if (P.getRole().equals("owner")) {
-                    ownerpage O = new ownerpage(P);
+                    halamanowner O = new halamanowner(P);
                     O.setExtendedState(Frame.MAXIMIZED_BOTH);
                     this.setVisible(false);
                     O.setVisible(true);
